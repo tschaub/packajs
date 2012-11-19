@@ -4,6 +4,6 @@
   "main": "./build/app.js",
   "scripts": "./js",
   "dependencies": {
-    "clamp": "test/assets/clamp"
+    "clamp": "../clamp"
   }
 }

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "./index.js",
   "dependencies": {
-    "min": "test/assets/min",
-    "max": "test/assets/max"
+    "min": "../min",
+    "max": "../max"
   }
 }

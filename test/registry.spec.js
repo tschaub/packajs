@@ -1,33 +1,60 @@
 var assert = require('assert');
 var path = require('path');
 var registry = require('../lib/registry');
+var tmp = require('tmp');
+var wrench = require('wrench');
+var bower = require('bower');
 
 describe('registry', function() {
 
-  describe('#getPackages()', function() {
+  describe('#getComponents()', function() {
 
-    it('should order packages based on dependencies', function(done) {
+    var assets = path.join(__dirname, 'assets'),
+        scratch, app;
 
-      registry.getPackages(path.join(__dirname, 'assets', 'app')).
+    before(function(done) {
+      tmp.dir(function(error, tmpPath) {
+        scratch = tmpPath;
+        if (error) {
+          done(error);
+        }
+        wrench.copyDirSyncRecursive(assets, scratch);
+        app = path.join(scratch, 'app');
+        process.chdir(app);
+        bower.commands.install([]).
+            on('error', done).
+            on('end', function() {
+              done();
+            });
+      });
+    });
 
-          then(function(packages) {
-            // got all packages
-            assert.equal(packages.length, 4);
+    after(function() {
+      wrench.rmdirSyncRecursive(scratch);
+    });
+
+    it('should order components based on dependencies', function(done) {
+
+      registry.getComponents(app).
+
+          then(function(components) {
+            // got all components
+            assert.equal(components.length, 4);
 
             // app is last
-            assert.equal(packages[3].json.name, 'app');
+            assert.equal(components[3].name, 'app');
 
             // clamp is penultimate
-            assert.equal(packages[2].json.name, 'clamp');
+            assert.equal(components[2].name, 'clamp');
 
             // min/max are first two
-            var names = packages.slice(0, 2).map(function(pkg) {
-              return pkg.json.name;
+            var names = components.slice(0, 2).map(function(component) {
+              return component.name;
             });
             assert.deepEqual(names.sort(), ['max', 'min']);
 
             // first should never have dependencies (circular deps notwithstanding)
-            assert.deepEqual(Object.keys(packages[0].dependencies), [], 'no deps');
+            assert.deepEqual(Object.keys(components[0].dependencies || {}), [], 'no deps');
 
             done();
           }).
@@ -38,7 +65,7 @@ describe('registry', function() {
 
     it('should allow errors to be handled', function(done) {
 
-      registry.getPackages('bogus-path').
+      registry.getComponents('bogus-path').
 
           then(function(packages) {
             done(new Error('Treated a bogus path as a valid package'));
