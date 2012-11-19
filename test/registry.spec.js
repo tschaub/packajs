@@ -17,17 +17,17 @@ describe('registry', function() {
             // app is last
             assert.equal(packages[3].json.name, 'app');
 
-            // first should never have dependencies (circular deps notwithstanding)
-            assert.deepEqual(Object.keys(packages[0].dependencies), [], 'no deps');
-
             // clamp is penultimate
             assert.equal(packages[2].json.name, 'clamp');
 
             // min/max are first two
-            var names = packages.splice(0, 2).map(function(pkg) {
+            var names = packages.slice(0, 2).map(function(pkg) {
               return pkg.json.name;
             });
             assert.deepEqual(names.sort(), ['max', 'min']);
+
+            // first should never have dependencies (circular deps notwithstanding)
+            assert.deepEqual(Object.keys(packages[0].dependencies), [], 'no deps');
 
             done();
           }).
