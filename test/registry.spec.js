@@ -36,6 +36,20 @@ describe('registry', function() {
 
     });
 
+    it('should allow errors to be handled', function(done) {
+
+      registry.getPackages('bogus-path').
+
+          then(function(packages) {
+            done(new Error('Treated a bogus path as a valid package'));
+          }).
+
+          fail(function(error) {
+            done();
+          });
+
+    });
+
   });
 
 });
