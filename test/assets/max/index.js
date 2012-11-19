@@ -1,0 +1,1 @@
+var max = Math.max;
