@@ -8,7 +8,7 @@
 
     var src;
     for (var i=0; i<files.length; i++) {
-        src = index + "@" + files[i];
+        src = index + "/" + files[i];
         pieces[i] = "<script src='" + src + "'></script>";
     }
     document.write(pieces.join(""));

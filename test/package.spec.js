@@ -1,11 +1,11 @@
 var assert = require('assert');
 var path = require('path');
-var registry = require('../lib/registry');
+var pkg = require('../lib/package');
 var tmp = require('tmp');
 var wrench = require('wrench');
 var bower = require('bower');
 
-describe('registry', function() {
+describe('package', function() {
 
   describe('#getComponents()', function() {
 
@@ -35,7 +35,7 @@ describe('registry', function() {
 
     it('should order components based on dependencies', function(done) {
 
-      registry.getComponents(app).
+      pkg.getComponents(app).
 
           then(function(components) {
             // got all components
@@ -65,7 +65,7 @@ describe('registry', function() {
 
     it('should allow errors to be handled', function(done) {
 
-      registry.getComponents('bogus-path').
+      pkg.getComponents('bogus-path').
 
           then(function(packages) {
             done(new Error('Treated a bogus path as a valid package'));
