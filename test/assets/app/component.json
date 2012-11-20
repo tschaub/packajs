@@ -1,7 +1,7 @@
 {
   "name": "app",
   "version": "1.0.0",
-  "main": "./build/app.js",
+  "main": "./js/app.js",
   "scripts": "./js",
   "dependencies": {
     "clamp": "../clamp"
