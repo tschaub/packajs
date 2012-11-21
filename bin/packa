@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+var program = require('commander'),
+    config = require('../package.json'),
+    commands = require('../lib/commands');
+
+program
+    .version(config.version)
+    .usage('[options] <command>');
+
+Object.keys(commands).forEach(function(name) {
+  var command = commands[name];
+  program
+      .command(command.usage || name)
+      .description(command.description)
+      .action(command.action);
+});
+
+program.parse(process.argv);
+
+if (program.args.length == 0) {
+  program.help();
+}
