@@ -37,7 +37,7 @@ describe('package', function() {
 
       pkg.getComponents(app).
 
-          then(function(components) {
+          on('data', function(components) {
             // got all components
             assert.equal(components.length, 4);
 
@@ -59,7 +59,7 @@ describe('package', function() {
             done();
           }).
 
-          fail(done);
+          on('error', done);
 
     });
 
@@ -67,12 +67,12 @@ describe('package', function() {
 
       pkg.getComponents('bogus-path').
 
-          then(function(packages) {
-            done(new Error('Treated a bogus path as a valid package'));
+          on('error', function(error) {
+            done();
           }).
 
-          fail(function(error) {
-            done();
+          on('data', function(packages) {
+            done(new Error('Treated a bogus path as a valid package'));
           });
 
     });
