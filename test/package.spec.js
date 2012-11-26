@@ -35,45 +35,44 @@ describe('package', function() {
 
     it('should order components based on dependencies', function(done) {
 
-      pkg.getComponents(app).
+      pkg.getComponents(app, function(error, components) {
+        if (error) {
+          done(error);
+        }
 
-          on('data', function(components) {
-            // got all components
-            assert.equal(components.length, 4);
+        // got all components
+        assert.equal(components.length, 4);
 
-            // app is last
-            assert.equal(components[3].name, 'app');
+        // app is last
+        assert.equal(components[3].name, 'app');
 
-            // clamp is penultimate
-            assert.equal(components[2].name, 'clamp');
+        // clamp is penultimate
+        assert.equal(components[2].name, 'clamp');
 
-            // min/max are first two
-            var names = components.slice(0, 2).map(function(component) {
-              return component.name;
-            });
-            assert.deepEqual(names.sort(), ['max', 'min']);
+        // min/max are first two
+        var names = components.slice(0, 2).map(function(component) {
+          return component.name;
+        });
+        assert.deepEqual(names.sort(), ['max', 'min']);
 
-            // first should never have dependencies (circular deps notwithstanding)
-            assert.deepEqual(Object.keys(components[0].dependencies || {}), [], 'no deps');
+        // first should never have dependencies (circular deps notwithstanding)
+        assert.deepEqual(Object.keys(components[0].dependencies || {}), [], 'no deps');
 
-            done();
-          }).
-
-          on('error', done);
+        done();
+      });
 
     });
 
     it('should allow errors to be handled', function(done) {
 
-      pkg.getComponents('bogus-path').
-
-          on('error', function(error) {
-            done();
-          }).
-
-          on('data', function(packages) {
-            done(new Error('Treated a bogus path as a valid package'));
-          });
+      pkg.getComponents('bogus-path', function(error, components) {
+        if (error) {
+          assert.ok(true, 'error handled');
+          done();
+        } else {
+          done(new Error('Treated a bogus path as a valid package'));
+        }
+      });
 
     });
 
