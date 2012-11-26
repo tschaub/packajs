@@ -1,8 +1,28 @@
 {
   "name": "packa",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Debug server and build utility for Bower packages",
   "keywords": ["bower", "builder", "debug", "server"],
+  "author": {
+    "name": "tschaub"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://tschaub.mit-license.org/"
+    }
+  ],
+  "main": "lib",
+  "bin": {
+    "packa": "bin/packa"
+  },
+  "preferGlobal": true,
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
   "dependencies": {
     "bower": "~0.4.0",
     "node-static": "0.6.5",
