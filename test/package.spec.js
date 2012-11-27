@@ -7,9 +7,21 @@ var bower = require('bower');
 
 describe('package', function() {
 
+  describe('#getMainScript()', function() {
+
+    it('gets main js entry from component.json', function() {
+      var app = path.join(__dirname, 'assets', 'app');
+      var config = require(path.join(app, bower.config.json));
+      var main = pkg.getMainScript(config);
+      assert.equal(main, path.join('js', 'app.min.js'));
+    });
+
+  });
+
   describe('#getComponents()', function() {
 
     var assets = path.join(__dirname, 'assets'),
+        cwd = process.cwd(),
         scratch, app;
 
     before(function(done) {
@@ -24,6 +36,7 @@ describe('package', function() {
         bower.commands.install([]).
             on('error', done).
             on('end', function() {
+              process.chdir(cwd);
               done();
             });
       });
