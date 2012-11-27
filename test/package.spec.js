@@ -13,7 +13,7 @@ describe('package', function() {
       var app = path.join(__dirname, 'assets', 'app');
       var config = require(path.join(app, bower.config.json));
       var main = pkg.getMainScript(config);
-      assert.equal(main, path.join('js', 'app.min.js'));
+      assert.equal(main, path.join('build', 'app.min.js'));
     });
 
   });
