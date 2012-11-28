@@ -8,13 +8,31 @@ program
     .version(config.version)
     .usage('[options] <command>');
 
+var cmdMap = {};
 Object.keys(commands).forEach(function(name) {
   var command = commands[name];
-  program
+  var cmd = program
       .command(command.usage || name)
       .description(command.description)
       .action(command.action);
+  if (command.options) {
+    command.options.forEach(function(opt) {
+      cmd.option.apply(cmd, opt);
+    });
+  }
+  cmdMap[name] = cmd;
 });
+
+program
+    .command('help [cmd]')
+    .description('display help for a particular command')
+    .action(function(name) {
+      if (cmdMap.hasOwnProperty(name)) {
+        cmdMap[name].help();
+      } else {
+        program.help();
+      }
+    });
 
 program.parse(process.argv);
 
