@@ -4,11 +4,11 @@ Debug server and build utility for Bower packages.
 
 # Installation
 
-    npm install packa
+    npm install pk
 
 # Launching the debug server
 
-    packa debug
+    pk debug
 
 # Running tests
 
