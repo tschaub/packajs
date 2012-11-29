@@ -1,10 +1,11 @@
 {
-  "name": "packa",
+  "name": "pk",
   "version": "0.2.2",
   "description": "Debug server and build utility for Bower packages",
   "keywords": ["bower", "builder", "debug", "server"],
   "author": {
-    "name": "tschaub"
+    "name": "Tim Schaub",
+    "url": "http://tschaub.net/"
   },
   "licenses": [
     {
@@ -12,9 +13,17 @@
       "url": "http://tschaub.mit-license.org/"
     }
   ],
+  "homepage": "https://github.com/tschaub/pk.js",
+  "bugs": {
+    "url" : "https://github.com/tschaub/pk.js/issues"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/tschaub/pk.js.git"
+  },
   "main": "lib",
   "bin": {
-    "packa": "bin/packa"
+    "pk": "bin/pk"
   },
   "preferGlobal": true,
   "scripts": {

@@ -1,4 +1,4 @@
-# PackaJS
+# pk.js
 
 Debug server and build utility for Bower packages.
 
