@@ -1,6 +1,6 @@
 {
   "name": "pk",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Debug server and build utility for Bower packages",
   "keywords": ["bower", "builder", "debug", "server"],
   "author": {
