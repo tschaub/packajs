@@ -1,14 +1,14 @@
-# pk.js
+# PackaJS
 
 Debug server and build utility for Bower packages.
 
 # Installation
 
-    npm install pk
+    npm install packa
 
 # Launching the debug server
 
-    pk debug
+    packa debug
 
 # Running tests
 

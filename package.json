@@ -1,5 +1,5 @@
 {
-  "name": "pk",
+  "name": "packa",
   "version": "0.2.4",
   "description": "Debug server and build utility for Bower packages",
   "keywords": ["bower", "builder", "debug", "server"],
@@ -13,17 +13,17 @@
       "url": "http://tschaub.mit-license.org/"
     }
   ],
-  "homepage": "https://github.com/tschaub/pk.js",
+  "homepage": "https://github.com/tschaub/packajs",
   "bugs": {
-    "url" : "https://github.com/tschaub/pk.js/issues"
+    "url" : "https://github.com/tschaub/packajs/issues"
   },
   "repository": {
     "type" : "git",
-    "url" : "https://github.com/tschaub/pk.js.git"
+    "url" : "https://github.com/tschaub/packajs.git"
   },
   "main": "lib",
   "bin": {
-    "pk": "bin/pk"
+    "packa": "bin/packa"
   },
   "preferGlobal": true,
   "scripts": {
@@ -33,7 +33,7 @@
     "node": ">=0.8.0"
   },
   "dependencies": {
-    "bower": "~0.4.0",
+    "bower": "0.6.5",
     "node-static": "~0.6.5",
     "uglify-js": "1.x",
     "wrench": "1.x",
