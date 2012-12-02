@@ -1,6 +1,6 @@
 {
   "name": "packa",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Debug server and build utility for Bower packages",
   "keywords": ["bower", "builder", "debug", "server"],
   "author": {
