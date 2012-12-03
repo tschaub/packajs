@@ -37,7 +37,8 @@
     "node-static": "~0.6.5",
     "uglify-js": "1.x",
     "wrench": "1.x",
-    "commander": "1.x"
+    "commander": "1.x",
+    "npmlog": "~0.0.2"
   },
   "devDependencies": {
     "mocha": "~1.7.0",

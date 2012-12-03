@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 
 var program = require('commander'),
+    log = require('npmlog'),
     config = require('../package.json'),
     commands = require('../lib/commands');
 
 program
     .version(config.version)
-    .usage('[options] <command>');
+    .usage('[options] <command>')
+    .option('-l, --loglevel <level>', 'set logging level [verbose]', 'verbose');
 
 var cmdMap = {};
 Object.keys(commands).forEach(function(name) {

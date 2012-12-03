@@ -43,7 +43,7 @@ describe('build', function() {
 
       assert.ok(!fs.existsSync(main), 'main does not exist before build');
 
-      var emitter = build.action({dir: app, verbose: false});
+      var emitter = build.action({dir: app, parent: {loglevel: 'error'}});
       emitter.on('error', done);
       emitter.on('end', function() {
         assert.ok(fs.existsSync(main), 'main exists after build');
