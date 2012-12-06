@@ -1,0 +1,9 @@
+{
+  "name": "PackaJS-101",
+  "version": "1.0.1",
+  "main": "build/js/app.min.js",
+  "scripts": ["src/js/app.js"],
+  "dependencies": {
+    "jquery": "1.x"
+  }
+}

@@ -1,0 +1,8 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+h1.neat {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 3em;
+  margin: 1em;
+}
