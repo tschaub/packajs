@@ -1,6 +1,6 @@
 var assert = require('assert');
 var path = require('path');
-var pkg = require('../lib/package');
+var pkg = require('../../lib/package');
 var tmp = require('tmp');
 var wrench = require('wrench');
 var bower = require('bower');
@@ -10,7 +10,7 @@ describe('package', function() {
   describe('#getMainScript()', function() {
 
     it('gets main js entry from component.json', function() {
-      var app = path.join(__dirname, 'assets', 'app');
+      var app = path.join(__dirname, '..', 'assets', 'app');
       var config = require(path.join(app, bower.config.json));
       var main = pkg.getMainScript(config);
       assert.equal(main, path.join('build', 'app.min.js'));
@@ -20,7 +20,7 @@ describe('package', function() {
 
   describe('#getComponents()', function() {
 
-    var assets = path.join(__dirname, 'assets'),
+    var assets = path.join(__dirname, '..', 'assets'),
         cwd = process.cwd(),
         scratch, app;
 

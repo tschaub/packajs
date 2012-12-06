@@ -1,8 +1,8 @@
 var assert = require('assert');
 var fs = require('fs');
 var path = require('path');
-var pkg = require('../lib/package');
-var build = require('../lib/commands/build');
+var pkg = require('../../../lib/package');
+var build = require('../../../lib/commands/build');
 var tmp = require('tmp');
 var wrench = require('wrench');
 var bower = require('bower');
@@ -11,7 +11,7 @@ describe('build', function() {
 
   describe('#action()', function() {
 
-    var assets = path.join(__dirname, 'assets'),
+    var assets = path.join(__dirname, '..', '..', 'assets'),
         cwd = process.cwd(),
         scratch, app;
 
