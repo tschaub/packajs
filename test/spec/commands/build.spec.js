@@ -28,6 +28,7 @@ describe('build', function() {
             on('error', done).
             on('end', function() {
               process.chdir(cwd);
+              console.log('tmp app dir: %s', tmpPath);
               done();
             });
       });
