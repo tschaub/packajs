@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-var program = require('commander'),
-    log = require('npmlog'),
-    config = require('../package.json'),
-    commands = require('../lib/commands');
+var program = require('commander');
+var log = require('npmlog');
+
+var config = require('../package.json');
+var commands = require('../lib/commands');
 
 program
     .version(config.version)
