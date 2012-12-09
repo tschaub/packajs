@@ -24,8 +24,4 @@ Tests are written with Mocha and can be run with the following:
 
     npm test
 
-## Build status
-
 [![Current Status](https://secure.travis-ci.org/tschaub/packajs.png?branch=master)](https://travis-ci.org/tschaub/packajs)
-
-See build status history on [Travis](https://travis-ci.org/tschaub/packajs/builds).

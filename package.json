@@ -34,14 +34,14 @@
   },
   "dependencies": {
     "bower": "0.6.5",
-    "node-static": "~0.6.5",
+    "node-static": "0.6.5",
     "uglify-js": "1.x",
     "wrench": "1.x",
     "commander": "1.x",
-    "npmlog": "~0.0.2"
+    "npmlog": "0.0.2"
   },
   "devDependencies": {
-    "mocha": "~1.7.0",
-    "tmp": "~0.0.15"
+    "mocha": "1.7.0",
+    "tmp": "0.0.16"
   }
 }
