@@ -18,7 +18,6 @@ describe('build', function() {
         scratch, app, main;
 
     before(function(done) {
-      pkg.flush();
       tmp.dir(function(error, tmpPath) {
         scratch = tmpPath;
         if (error) {
