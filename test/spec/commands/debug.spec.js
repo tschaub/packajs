@@ -18,20 +18,30 @@ describe('debug', function() {
       scratch, app, main;
 
   before(function(done) {
+    pkg.flush();
     tmp.dir(function(error, tmpPath) {
       scratch = tmpPath;
       if (error) {
-        done(error);
+        return done(error);
       }
       wrench.copyDirSyncRecursive(assets, scratch);
       app = path.join(scratch, 'app');
-      main = pkg.getMainScript(require(path.join(app, bower.config.json))),
       process.chdir(app);
-      bower.commands.install([]).
-          on('error', done).
-          on('end', function() {
+      bower.commands.install([])
+          .on('error', function(error) {
             process.chdir(cwd);
-            done();
+            done(error);
+          })
+          .on('end', function() {
+            process.chdir(cwd);
+            pkg.getComponents(app, function(error, components) {
+              if (error) {
+                done(error);
+              } else {
+                main = pkg.getMainScript(components[components.length - 1]);
+                done();
+              }
+            });
           });
     });
   });
@@ -44,16 +54,19 @@ describe('debug', function() {
 
     var server;
     beforeEach(function(done) {
-      server = debug.action({port: PORT, directory: app}).on('listening', done);
+      server = debug.action({
+        port: PORT, directory: app,
+        parent: {loglevel: 'error'}
+      }).on('listening', done);
     });
 
     afterEach(function(done) {
-       server.close(done);
+      server.close(done);
     });
 
-    function url(parts) {
-      parts = Array.prototype.join.call(arguments, '/');
-      return 'http://localhost:' + PORT + '/' + parts;
+    function url(file) {
+      var relative = path.relative(app, file);
+      return 'http://localhost:' + PORT + '/' + relative;
     }
 
     function body(response, callback) {
@@ -77,7 +90,7 @@ describe('debug', function() {
           // TODO: check content
           assert.ok(content.length > 100);
           done();
-        })
+        });
       }).on('error', done);
 
     });
