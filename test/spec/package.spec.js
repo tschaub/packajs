@@ -7,50 +7,42 @@ var bower = require('bower');
 
 describe('package', function() {
 
-  describe('#getMainScript()', function() {
+  var assets = path.join(__dirname, '..', 'assets'),
+      cwd = process.cwd(),
+      scratch, app;
 
-    it('gets main js entry from component.json', function() {
-      var app = path.join(__dirname, '..', 'assets', 'app');
-      var config = require(path.join(app, bower.config.json));
-      var main = pkg.getMainScript(config);
-      assert.equal(main, path.join('build', 'app.min.js'));
+  before(function(done) {
+    tmp.dir(function(error, tmpPath) {
+      scratch = tmpPath;
+      if (error) {
+        done(error);
+      }
+      wrench.copyDirSyncRecursive(assets, scratch);
+      app = path.join(scratch, 'app');
+      process.chdir(app);
+      bower.commands.install([])
+          .on('error', function(error) {
+            process.chdir(cwd);
+            done(error);
+          })
+          .on('end', function() {
+            process.chdir(cwd);
+            done();
+          });
     });
+  });
 
+  after(function() {
+    wrench.rmdirSyncRecursive(scratch);
   });
 
   describe('#getComponents()', function() {
-
-    var assets = path.join(__dirname, '..', 'assets'),
-        cwd = process.cwd(),
-        scratch, app;
-
-    before(function(done) {
-      tmp.dir(function(error, tmpPath) {
-        scratch = tmpPath;
-        if (error) {
-          done(error);
-        }
-        wrench.copyDirSyncRecursive(assets, scratch);
-        app = path.join(scratch, 'app');
-        process.chdir(app);
-        bower.commands.install([]).
-            on('error', done).
-            on('end', function() {
-              process.chdir(cwd);
-              done();
-            });
-      });
-    });
-
-    after(function() {
-      wrench.rmdirSyncRecursive(scratch);
-    });
 
     it('should order components based on dependencies', function(done) {
 
       pkg.getComponents(app, function(error, components) {
         if (error) {
-          done(error);
+          return done(error);
         }
 
         // got all components
@@ -69,7 +61,8 @@ describe('package', function() {
         assert.deepEqual(names.sort(), ['max', 'min']);
 
         // first should never have dependencies (circular deps notwithstanding)
-        assert.deepEqual(Object.keys(components[0].dependencies || {}), [], 'no deps');
+        assert.deepEqual(Object.keys(components[0].dependencies || {}),
+            [], 'no deps');
 
         done();
       });
@@ -87,6 +80,21 @@ describe('package', function() {
         }
       });
 
+    });
+
+  });
+
+  describe('#getMainScript()', function() {
+
+    it('gets main js entry from processed component', function(done) {
+      pkg.getComponents(app, function(error, components) {
+        if (error) {
+          return done(error);
+        }
+        var main = pkg.getMainScript(components[components.length - 1]);
+        assert.equal(main, path.join(app, 'build', 'app.min.js'));
+        done();
+      });
     });
 
   });
