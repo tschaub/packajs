@@ -17,7 +17,7 @@ describe('build', function() {
         cwd = process.cwd(),
         scratch, app, main;
 
-    before(function(done) {
+    beforeEach(function(done) {
       tmp.dir(function(error, tmpPath) {
         scratch = tmpPath;
         if (error) {
@@ -45,7 +45,7 @@ describe('build', function() {
       });
     });
 
-    after(function() {
+    afterEach(function() {
       wrench.rmdirSyncRecursive(scratch);
     });
 
@@ -61,6 +61,20 @@ describe('build', function() {
         done();
       });
     });
+
+    it('accepts an alternate target directory', function(done) {
+      var target = path.join(scratch, 'target', 'app');
+      var emitter = build.action({
+        directory: app, parent: {loglevel: 'error'}, target: target
+      });
+      emitter.on('error', done);
+      emitter.on('end', function() {
+        var targetMain = path.join(target, path.relative(app, main));
+        assert.ok(!fs.existsSync(main), 'main does not exist relative to app');
+        assert.ok(fs.existsSync(targetMain), 'main exists in target dir');
+        done();
+      });
+    })
 
   });
 
