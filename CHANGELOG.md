@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.9 (2013-01-02)
+
+ * Accept alternate build path (target option for build command)
+
 ## 0.2.8 (2012-12-16)
 
  * Use Bower 0.6.8 for offline dependency mapping
