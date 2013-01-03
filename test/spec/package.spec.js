@@ -92,7 +92,7 @@ describe('package', function() {
           return done(error);
         }
         var main = pkg.getMainScript(components[components.length - 1]);
-        assert.equal(main, path.join(app, 'build', 'app.min.js'));
+        assert.equal(main, path.join(app, 'js', 'app.min.js'));
         done();
       });
     });
