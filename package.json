@@ -1,8 +1,13 @@
 {
   "name": "packa",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "description": "Debug server and build utility for Bower packages",
-  "keywords": ["bower", "builder", "debug", "server"],
+  "keywords": [
+    "bower",
+    "builder",
+    "debug",
+    "server"
+  ],
   "author": {
     "name": "Tim Schaub",
     "url": "http://tschaub.net/"
@@ -15,11 +20,11 @@
   ],
   "homepage": "https://github.com/tschaub/packajs",
   "bugs": {
-    "url" : "https://github.com/tschaub/packajs/issues"
+    "url": "https://github.com/tschaub/packajs/issues"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/tschaub/packajs.git"
+    "type": "git",
+    "url": "https://github.com/tschaub/packajs.git"
   },
   "main": "lib",
   "bin": {
