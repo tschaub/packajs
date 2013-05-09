@@ -23,8 +23,8 @@ describe('build', function() {
         if (error) {
           return done(error);
         }
-        wrench.copyDirSyncRecursive(assets, scratch);
-        app = path.join(scratch, 'app');
+        wrench.copyDirSyncRecursive(assets, path.join(scratch, 'assets'));
+        app = path.join(scratch, 'assets', 'app');
         process.chdir(app);
         bower.commands.install([])
             .on('error', function(error) {
@@ -74,7 +74,7 @@ describe('build', function() {
         assert.ok(fs.existsSync(targetMain), 'main exists in target dir');
         done();
       });
-    })
+    });
 
   });
 

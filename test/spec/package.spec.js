@@ -17,8 +17,8 @@ describe('package', function() {
       if (error) {
         done(error);
       }
-      wrench.copyDirSyncRecursive(assets, scratch);
-      app = path.join(scratch, 'app');
+      wrench.copyDirSyncRecursive(assets, path.join(scratch, 'assets'));
+      app = path.join(scratch, 'assets', 'app');
       process.chdir(app);
       bower.commands.install([])
           .on('error', function(error) {

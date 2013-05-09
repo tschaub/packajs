@@ -41,7 +41,7 @@
     "bower": "0.9.2",
     "node-static": "0.6.5",
     "uglify-js": "1.x",
-    "wrench": "1.x",
+    "wrench": "1.5.1",
     "commander": "1.x",
     "npmlog": "0.0.2"
   },
