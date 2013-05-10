@@ -15,7 +15,7 @@ describe('package', function() {
     tmp.dir(function(error, tmpPath) {
       scratch = tmpPath;
       if (error) {
-        done(error);
+        return done(error);
       }
       wrench.copyDirSyncRecursive(assets, path.join(scratch, 'assets'));
       app = path.join(scratch, 'assets', 'app');
