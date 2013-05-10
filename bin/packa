@@ -17,7 +17,13 @@ Object.keys(commands).forEach(function(name) {
   var cmd = program
       .command(command.usage || name)
       .description(command.description)
-      .action(command.action);
+      .action(function(options) {
+        var emitter = command.action(options);
+        emitter.on('error', function(error) {
+          log.error(name + ' failed: ' + error.message);
+          process.exit(1);
+        });
+      });
   if (command.options) {
     command.options.forEach(function(opt) {
       cmd.option.apply(cmd, opt);
