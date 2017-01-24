@@ -1,5 +1,7 @@
 # PackaJS
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/tschaub/packajs.svg)](https://greenkeeper.io/)
+
 Debug server and build utility for [Bower](http://twitter.github.com/bower/) packages.  Bower makes it easy to pull down front-end libraries for your application.  PackaJS helps you debug your scripts during development and prepare them for deployment.
 
 # Installation
